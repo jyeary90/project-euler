@@ -1,17 +1,24 @@
 #this program is designed to solve project euler problem #370 in python 2.7.6
 #http://projecteuler.net/problem=370
 
-n = 10**6 #so i can test my program to see if it returns the correct value
-possible_triangles = {} #will append geometric product triangles
+n = 10**6
+length=range(n+1)
 
-#create a class of triangles with functions to determine perimeter and test for geometric products
-class Triangles:
+class Triangles(object):
         def __init__(self, a, b, c):
                 self.a = a
                 self.b = b
                 self.c = c
+                a <= n
+                b <= n
+                c <= n
         def perimeter(self):
                 return self.a + self.b + self.c
+        def side_range(self):
+                if (self.a <= n) and (self.b <= n) and (self.c <= n):
+                        return True
+                else:
+                        return False
         def triangle_sides(self):
                 if self.a < self.b < self.c:
                         return True
@@ -23,25 +30,15 @@ class Triangles:
                                 return True
                 else:
                         return False
+        def triangle_inequality(self):
+                sides = [self.a, self.b, self.c]
+                if sum(sides) - max(sides) > max(sides):
+                        return True
+                else:
+                        return False
+                
+the_triangles=Triangles(a,b,c)
+possible_triangles = filter(the_triangles.triangle_inequality(), the_triangles)
 
 
-#adds all triangles of perimeter <= n to the set of possible triangles
-for a in range(n+1):
-        for b in range(n+1):
-                for c in range(n+1):
-                        triangle = Triangles(a,b,c)
-                        if triangle.perimeter() <= range(n+1):
-                                possible_triangles += triangle
-
-#this function determines how many triangles of the possible triangles satisfy the geometric product condition
-def number_of_triangles(x):
-        count = 0
-        while True:
-                for elts in x:
-                        if elts.geo_prog() == True:
-                                yield elts
-                        count += 1
-        print count
-
-number_of_triangles(possible_triangles)
-
+print len(possible_triangles)
