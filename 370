@@ -1,43 +1,10 @@
-*.py[cod]
+#this program is designed to solve project euler problem #370 in python 2.7.6
+#http://projecteuler.net/problem=370
 
-# C extensions
-*.so
+n = 10**6 #so i can test my program to see if it returns the correct value
+possible_triangles = {} #will append geometric product triangles
 
-# Packages
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-bin
-var
-sdist
-develop-eggs
-.installed.cfg
-lib
-lib64
-__pycache__
-
-# Installer logs
-pip-log.txt
-
-# Unit test / coverage reports
-.coverage
-.tox
-nosetests.xml
-
-# Translations
-*.mo
-
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
-
-n = 10**6
-possible_triangles = {}
-
+#create a class of triangles with functions to determine perimeter and test for geometric products
 class Triangles:
         def __init__(self, a, b, c):
                 self.a = a
@@ -58,6 +25,7 @@ class Triangles:
                         return False
 
 
+#adds all triangles of perimeter <= n to the set of possible triangles
 for a in range(n+1):
         for b in range(n+1):
                 for c in range(n+1):
@@ -65,11 +33,7 @@ for a in range(n+1):
                         if triangle.perimeter() <= range(n+1):
                                 possible_triangles += triangle
 
-print len(possible_triangles)
-
-
-
-
+#this function determines how many triangles of the possible triangles satisfy the geometric product condition
 def number_of_triangles(x):
         count = 0
         while True:
@@ -80,3 +44,4 @@ def number_of_triangles(x):
         print count
 
 number_of_triangles(possible_triangles)
+
