@@ -1,0 +1,82 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+__pycache__
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+n = 10**6
+possible_triangles = {}
+
+class Triangles:
+        def __init__(self, a, b, c):
+                self.a = a
+                self.b = b
+                self.c = c
+        def perimeter(self):
+                return self.a + self.b + self.c
+        def triangle_sides(self):
+                if self.a < self.b < self.c:
+                        return True
+                else:
+                        return False
+        def geo_prog(self):
+                if triangle_sides(self)==True:
+                        if self.b**2==self.a*self.c:
+                                return True
+                else:
+                        return False
+
+
+for a in range(n+1):
+        for b in range(n+1):
+                for c in range(n+1):
+                        triangle = Triangles(a,b,c)
+                        if triangle.perimeter() <= range(n+1):
+                                possible_triangles += triangle
+
+print len(possible_triangles)
+
+
+
+
+def number_of_triangles(x):
+        count = 0
+        while True:
+                for elts in x:
+                        if elts.geo_prog() == True:
+                                yield elts
+                        count += 1
+        print count
+
+number_of_triangles(possible_triangles)
